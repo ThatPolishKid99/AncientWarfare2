@@ -15,6 +15,6 @@
     "result": {
         "type": "minecraft:item_nbt",
         "item": "ancientwarfarestructure:coin_stack_gold",
-        "nbt": "{size:8}"
+        "nbt": "{size:0}"
     }
 }
