@@ -180,13 +180,5 @@
 		"gui": {
 			"rotation": [0, 180, 0]
 		}
-	},
-	"overrides": [
-		{
-			"predicate": {
-				"blocking": 1.0
-			},
-			"model": "ancientwarfare:item/npc/shield_round_1_blocking"
-		}
-	]
+	}
 }
