@@ -39,7 +39,7 @@ public class StructureTemplate {
 	 * stored template data
 	 */
 	public final Set<String> modDependencies;
-	private Map<Integer, TemplateRuleBlock> blockRules;
+	private Map<Integer, TemplateRule> blockRules;
 	private Map<Integer, TemplateRuleEntityBase> entityRules;
 	private short[] templateData;
 	private List<BuildResource> resourceList;
@@ -65,7 +65,7 @@ public class StructureTemplate {
 		return entityRules;
 	}
 
-	public Map<Integer, TemplateRuleBlock> getBlockRules() {
+	public Map<Integer, TemplateRule> getBlockRules() {
 		return blockRules;
 	}
 
@@ -77,7 +77,7 @@ public class StructureTemplate {
 		return validator;
 	}
 
-	public void setBlockRules(Map<Integer, TemplateRuleBlock> rules) {
+	public void setBlockRules(Map<Integer, TemplateRule> rules) {
 		this.blockRules = rules;
 	}
 
@@ -93,7 +93,12 @@ public class StructureTemplate {
 		this.validator = settings;
 	}
 
-	public Optional<TemplateRuleBlock> getRuleAt(Vec3i pos) {
+	public Optional<TemplateRuleBlock> getBlockRuleAt(Vec3i pos) {
+		Optional<TemplateRule> rule = getRuleAt(pos);
+		return !rule.isPresent() || !(rule.get() instanceof TemplateRuleBlock) ? Optional.empty() : Optional.of((TemplateRuleBlock) rule.get());
+	}
+
+	public Optional<TemplateRule> getRuleAt(Vec3i pos) {
 		int index = getIndex(pos, size);
 		int ruleIndex = index >= 0 && index < templateData.length ? templateData[index] : -1;
 		return Optional.ofNullable(blockRules.get(ruleIndex));
@@ -251,10 +256,9 @@ public class StructureTemplate {
 	}
 
 	public static class BuildResource implements INBTSerializable<NBTTagCompound> {
-		private static final String STACK_TO_RETURN_TAG = "stackToReturn";
 		private ItemStack stackRequired;
-		private ItemStack stackToReturn = ItemStack.EMPTY;
-		private int requiredOriginalCount = 0;
+		private ItemStack stackToReturn;
+		private int requiredOriginalCount;
 
 		private BuildResource(ItemStack stackRequired, ItemStack stackToReturn) {
 			this.stackRequired = stackRequired;
@@ -262,8 +266,8 @@ public class StructureTemplate {
 			requiredOriginalCount = stackRequired.getCount();
 		}
 
-		private BuildResource(ItemStack stackRequired) {
-			this.stackRequired = stackRequired;
+		public BuildResource(ItemStack stackRequired) {
+			this(stackRequired, ItemStack.EMPTY);
 		}
 
 		public BuildResource() {}
@@ -272,11 +276,15 @@ public class StructureTemplate {
 			return stackRequired;
 		}
 
+		public ItemStack getStackToReturn() {
+			return stackToReturn;
+		}
+
 		public BuildResource copy() {
 			return new BuildResource(stackRequired.copy(), stackToReturn.copy());
 		}
 
-		public ItemStack shrinkStackRequiredAndGetRemaining() {
+		public ItemStack shrinkStackRequired() {
 			stackRequired.shrink(1);
 			if (!stackToReturn.isEmpty() && stackRequired.getCount() % requiredOriginalCount == 0) {
 				return stackToReturn.copy();
@@ -291,19 +299,15 @@ public class StructureTemplate {
 		public NBTTagCompound serializeNBT() {
 			NBTTagCompound tag = new NBTTagCompound();
 			tag.setTag("stackRequired", stackRequired.writeToNBT(new NBTTagCompound()));
-			if (!stackToReturn.isEmpty()) {
-				tag.setTag(STACK_TO_RETURN_TAG, stackToReturn.writeToNBT(new NBTTagCompound()));
-				tag.setInteger("requiredOriginalCount", requiredOriginalCount);
-			}
+			tag.setTag("stackToReturn", stackToReturn.writeToNBT(new NBTTagCompound()));
+			tag.setInteger("requiredOriginalCount", requiredOriginalCount);
 			return tag;
 		}
 
 		public void deserializeNBT(NBTTagCompound tag) {
 			stackRequired = new ItemStack(tag.getCompoundTag("stackRequired"));
-			if (tag.hasKey(STACK_TO_RETURN_TAG)) {
-				stackToReturn = new ItemStack(tag.getCompoundTag(STACK_TO_RETURN_TAG));
-				requiredOriginalCount = tag.getInteger("requiredOriginalCount");
-			}
+			stackToReturn = new ItemStack(tag.getCompoundTag("stackToReturn"));
+			requiredOriginalCount = tag.getInteger("requiredOriginalCount");
 		}
 	}
 }

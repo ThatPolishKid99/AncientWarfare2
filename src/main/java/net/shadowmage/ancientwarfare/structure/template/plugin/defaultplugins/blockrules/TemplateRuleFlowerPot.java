@@ -17,7 +17,6 @@ import net.shadowmage.ancientwarfare.structure.api.IStructureBuilder;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class TemplateRuleFlowerPot extends TemplateRuleVanillaBlocks {
 	public static final String PLUGIN_NAME = "vanillaFlowerPot";
@@ -43,8 +42,8 @@ public class TemplateRuleFlowerPot extends TemplateRuleVanillaBlocks {
 	}
 
 	@Override
-	protected Optional<ItemStack> getStack() {
-		return Optional.of(new ItemStack(Items.FLOWER_POT));
+	protected ItemStack getStack() {
+		return new ItemStack(Items.FLOWER_POT);
 	}
 
 	@Override
