@@ -58,10 +58,6 @@ public class StructureMap extends WorldSavedData {
 		return Optional.empty();
 	}
 
-	public Optional<StructureEntry> getStructureAt(World world, int chunkX, int chunkZ) {
-		return map.getEntryAt(world.provider.getDimension(), chunkX, chunkZ);
-	}
-
 	public void setGeneratedAt(World world, int worldX, int worldY, int worldZ, EnumFacing face, StructureEntry entry, boolean unique) {
 		int cx = worldX >> 4;
 		int cz = worldZ >> 4;
@@ -72,7 +68,7 @@ public class StructureMap extends WorldSavedData {
 	public void setGeneratedAt(int dimension, int cx, int cz, StructureEntry entry, boolean unique) {
 		map.setGeneratedAt(dimension, cx, cz, entry, unique);
 		markDirty();
-		NetworkHandler.sendToAllPlayers(new PacketStructureEntry(dimension, cx, cz, entry));
+		NetworkHandler.sendToAllPlayers(new PacketStructureEntry(dimension, cx, cz, entry, unique));
 	}
 
 	public boolean isGeneratedUnique(String name) {
@@ -92,13 +88,6 @@ public class StructureMap extends WorldSavedData {
 				return mapsByDimension.get(dimension).getEntriesNear(chunkX, chunkZ, chunkRadius, expandBySize, list);
 			}
 			return Collections.emptyList();
-		}
-
-		private Optional<StructureEntry> getEntryAt(int dimension, int chunkX, int chunkZ) {
-			if (!mapsByDimension.containsKey(dimension)) {
-				return Optional.empty();
-			}
-			return mapsByDimension.get(dimension).getEntryAt(chunkX, chunkZ);
 		}
 
 		private void setGeneratedAt(int dimension, int chunkX, int chunkZ, StructureEntry entry, boolean unique) {
@@ -193,13 +182,6 @@ public class StructureMap extends WorldSavedData {
 			if (z > largestGeneratedZ) {
 				largestGeneratedZ = z;
 			}
-		}
-
-		public Optional<StructureEntry> getEntryAt(int chunkX, int chunkZ) {
-			if (!worldMap.containsKey(chunkX)) {
-				return Optional.empty();
-			}
-			return Optional.ofNullable(worldMap.get(chunkX).get(chunkZ));
 		}
 
 		public void readFromNBT(NBTTagCompound nbttagcompound) {
