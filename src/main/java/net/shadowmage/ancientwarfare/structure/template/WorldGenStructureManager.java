@@ -23,7 +23,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
-import java.util.function.Predicate;
 
 public class WorldGenStructureManager {
 
@@ -64,14 +63,11 @@ public class WorldGenStructureManager {
 	}
 
 	private void whitelistBiomes(StructureTemplate template, Set<String> biomes, Set<String> biomeGroupBiomes) {
-		addTemplateToBiomes(template, biomeGroupBiomes, b -> true);
-		addTemplateToBiomes(template, biomes, b -> biomeGroupBiomes.isEmpty() || biomeGroupBiomes.contains(b));
-	}
-
-	private void addTemplateToBiomes(StructureTemplate template, Set<String> biomeGroupBiomes, Predicate<String> checkBiome) {
-		for (String biome : biomeGroupBiomes) {
-			if (templatesByBiome.containsKey(biome) && checkBiome.test(biome)) {
-				templatesByBiome.get(biome).add(template);
+		for (String biome : biomes) {
+			if (templatesByBiome.containsKey(biome)) {
+				if (biomeGroupBiomes.isEmpty() || biomeGroupBiomes.contains(biome)) {
+					templatesByBiome.get(biome).add(template);
+				}
 			} else if (Loader.isModLoaded((new ResourceLocation(biome)).getResourceDomain())) {
 				AncientWarfareStructure.LOG.warn("Could not locate biome: {} while registering template: {} for world generation.", biome, template.name);
 			}
@@ -84,9 +80,7 @@ public class WorldGenStructureManager {
 			if (!biomes.isEmpty() && biomes.contains(biome)) {
 				continue;
 			}
-			if (templatesByBiome.containsKey(biome)) {
-				templatesByBiome.get(biome).add(template);
-			}
+			templatesByBiome.get(biome).add(template);
 		}
 	}
 
@@ -179,12 +173,12 @@ public class WorldGenStructureManager {
 	private StructureTemplate getWeightedRandomStructure(Random rng) {
 		int totalWeight = 0;
 		for (StructureTemplate t : trimmedPotentialStructures) {
-			totalWeight += t.getValidationSettings().getSelectionWeight() * t.getValidationSettings().getSelectionWeight();
+			totalWeight += t.getValidationSettings().getSelectionWeight();
 		}
 		int rnd = rng.nextInt(totalWeight + 1);
 		StructureTemplate toReturn = null;
 		for (StructureTemplate t : trimmedPotentialStructures) {
-			rnd -= t.getValidationSettings().getSelectionWeight() * t.getValidationSettings().getSelectionWeight();
+			rnd -= t.getValidationSettings().getSelectionWeight();
 			if (rnd <= 0) {
 				toReturn = t;
 				break;
