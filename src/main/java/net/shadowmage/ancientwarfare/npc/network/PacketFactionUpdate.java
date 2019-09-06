@@ -3,13 +3,11 @@ package net.shadowmage.ancientwarfare.npc.network;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufInputStream;
 import io.netty.buffer.ByteBufOutputStream;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
-import net.shadowmage.ancientwarfare.core.gamedata.AWGameData;
 import net.shadowmage.ancientwarfare.core.network.PacketBase;
 import net.shadowmage.ancientwarfare.npc.AncientWarfareNPC;
-import net.shadowmage.ancientwarfare.npc.gamedata.FactionData;
+import net.shadowmage.ancientwarfare.npc.faction.FactionTracker;
 
 import java.io.IOException;
 
@@ -45,9 +43,10 @@ public class PacketFactionUpdate extends PacketBase {
 	}
 
 	@Override
-	protected void execute(EntityPlayer player) {
+	protected void execute() {
 		if (packetData != null) {
-			AWGameData.INSTANCE.getData(player.world, FactionData.class).handlePacketData(player, packetData);
+			FactionTracker.INSTANCE.handlePacketData(packetData);
 		}
 	}
+
 }
