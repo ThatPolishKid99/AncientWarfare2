@@ -21,12 +21,18 @@ public class ItemClub extends ItemExtendedReachWeapon {
 
 	@Override
 	public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
-		return !EnchantmentHelper.getEnchantments(book).containsKey(Enchantments.KNOCKBACK);
+		if (EnchantmentHelper.getEnchantments(book).containsKey(Enchantments.KNOCKBACK)) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override
 	public boolean canApplyAtEnchantingTable(ItemStack stack, net.minecraft.enchantment.Enchantment enchantment) {
-		return enchantment != Enchantments.KNOCKBACK;
+		if (enchantment == Enchantments.KNOCKBACK)
+			return false;
+		else
+			return true;
 	}
 
 	@Override
