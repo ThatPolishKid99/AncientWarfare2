@@ -25,7 +25,7 @@ public class StructureValidatorGround extends StructureValidator {
 		Block block = state.getBlock();
 		if (!AWStructureStatics.isValidTargetBlock(state)) {
 			//noinspection ConstantConditions
-			AncientWarfareStructure.LOG.debug("Rejecting due to target block mismatch of: {} at: {},{},{}", () -> block.getRegistryName().toString(), () -> x, () -> y, () -> z);
+			AncientWarfareStructure.LOG.debug("Rejecting due to target block mismatch of: " + block.getRegistryName().toString() + " at: " + x + "," + y + "," + z);
 			return false;
 		}
 		return true;
@@ -47,24 +47,26 @@ public class StructureValidatorGround extends StructureValidator {
 		if (!isPreserveBlocks()) {
 			clearBB(world, template, bb);
 			prePlacementUnderfill(world, bb);
-			smoothoutBorder(world, bb, face, template);
 		}
 	}
 
-	private void smoothoutBorder(World world, StructureBB bb, EnumFacing face, StructureTemplate template) {
+	private void smoothoutBorder(World world, StructureBB bb, StructureTemplate template) {
 		int borderSize = getBorderSize();
 		if (borderSize > 0) {
-			new SmoothingMatrixBuilder(world, bb, borderSize, face, template).build()
+			new SmoothingMatrixBuilder(world, bb, borderSize, bb.min.getY() + template.getOffset().getY() - 1).build()
 					.apply(world, pos -> handleClearAction(world, pos, template, bb));
 		}
 	}
 
 	private void clearBB(World world, StructureTemplate template, StructureBB bb) {
-		BlockTools.getAllInBoxTopDown(bb.min, bb.max.add(0, 50 + getMaxLeveling(), 0)).forEach(pos -> handleClearAction(world, pos, template, bb));
+		BlockTools.getAllInBoxTopDown(bb.min, bb.max.add(0, 10 + getMaxLeveling(), 0)).forEach(pos -> handleClearAction(world, pos, template, bb));
 	}
 
 	@Override
 	public void postGeneration(World world, BlockPos origin, StructureBB bb, StructureTemplate template) {
+		if (!isPreserveBlocks()) {
+			smoothoutBorder(world, bb, template);
+		}
 		if (world.canSnowAt(origin.up(), false)) {
 			WorldStructureGenerator.sprinkleSnow(world, bb, getBorderSize());
 		}
