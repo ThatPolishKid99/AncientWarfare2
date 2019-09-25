@@ -555,7 +555,6 @@ public class AWStructureStatics extends ModConfiguration {
 				"rustic:marsh_mallow",
 				"rustic:mooncap_mushroom",
 				"rustic:wind_thistle",
-				"byg:structurecheckblock"
 		};
 
 		defaultSkippableBlocks = config.get(worldGenBlocks, "skippable_blocks", defaultSkippableBlocks).getStringList();
