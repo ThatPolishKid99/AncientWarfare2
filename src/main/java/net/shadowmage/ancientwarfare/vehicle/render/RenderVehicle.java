@@ -1,3 +1,24 @@
+/**
+ * Copyright 2012 John Cummens (aka Shadowmage, Shadowmage4513)
+ * This software is distributed under the terms of the GNU General Public License.
+ * Please see COPYING for precise license information.
+ * <p>
+ * This file is part of Ancient Warfare.
+ * <p>
+ * Ancient Warfare is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * <p>
+ * Ancient Warfare is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * <p>
+ * You should have received a copy of the GNU General Public License
+ * along with Ancient Warfare.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package net.shadowmage.ancientwarfare.vehicle.render;
 
 import net.minecraft.client.Minecraft;
@@ -13,6 +34,7 @@ import net.shadowmage.ancientwarfare.vehicle.config.AWVehicleStatics;
 import net.shadowmage.ancientwarfare.vehicle.entity.IVehicleType;
 import net.shadowmage.ancientwarfare.vehicle.entity.VehicleBase;
 import net.shadowmage.ancientwarfare.vehicle.registry.VehicleRegistry;
+import net.shadowmage.ancientwarfare.vehicle.render.vehicle.RenderAircraft;
 import net.shadowmage.ancientwarfare.vehicle.render.vehicle.RenderBallistaMobile;
 import net.shadowmage.ancientwarfare.vehicle.render.vehicle.RenderBallistaStand;
 import net.shadowmage.ancientwarfare.vehicle.render.vehicle.RenderBatteringRam;
@@ -27,7 +49,9 @@ import net.shadowmage.ancientwarfare.vehicle.render.vehicle.RenderCatapultMobile
 import net.shadowmage.ancientwarfare.vehicle.render.vehicle.RenderCatapultStandFixed;
 import net.shadowmage.ancientwarfare.vehicle.render.vehicle.RenderCatapultStandTurret;
 import net.shadowmage.ancientwarfare.vehicle.render.vehicle.RenderChestCart;
+import net.shadowmage.ancientwarfare.vehicle.render.vehicle.RenderHelicopter;
 import net.shadowmage.ancientwarfare.vehicle.render.vehicle.RenderHwacha;
+import net.shadowmage.ancientwarfare.vehicle.render.vehicle.RenderSubmarine;
 import net.shadowmage.ancientwarfare.vehicle.render.vehicle.RenderTrebuchetLarge;
 import net.shadowmage.ancientwarfare.vehicle.render.vehicle.RenderTrebuchetMobileFixed;
 import net.shadowmage.ancientwarfare.vehicle.render.vehicle.RenderTrebuchetStandFixed;
@@ -67,6 +91,10 @@ public class RenderVehicle extends Render<VehicleBase> {
 		vehicleRenders.put(VehicleRegistry.BOAT_BALLISTA, new RenderBoatBallista(renderManager));
 		vehicleRenders.put(VehicleRegistry.BOAT_CATAPULT, new RenderBoatCatapult(renderManager));
 		vehicleRenders.put(VehicleRegistry.BOAT_TRANSPORT, new RenderBoatTransport(renderManager));
+		vehicleRenders.put(VehicleRegistry.AIR_BOMBER, new RenderAircraft(renderManager));
+		vehicleRenders.put(VehicleRegistry.AIR_FIGHTER, new RenderAircraft(renderManager));
+		vehicleRenders.put(VehicleRegistry.AIR_HELICOPTER, new RenderHelicopter(renderManager));
+		vehicleRenders.put(VehicleRegistry.SUBMARINE_TEST, new RenderSubmarine(renderManager));
 	}
 
 	@Override
@@ -89,15 +117,17 @@ public class RenderVehicle extends Render<VehicleBase> {
 		bindTexture(vehicle.getTexture());
 		RenderVehicleBase render = vehicleRenders.get(vehicle.vehicleType);
 		render.renderVehicle(vehicle, x, y, z, renderYaw, partialTicks);
+		//TODO add code to change to team color - similar to RenderNpcBase code for it
 		GlStateManager.color(1.f, 1.f, 1.f, 1.f);
 		GlStateManager.popMatrix();
 		if (useAlpha) {
 			GlStateManager.disableBlend();
 		}
-
-		// dont' render nameplate for the vehicle that thePlayer is on
+		/**
+		 * dont' render nameplate for the vehicle that thePlayer is on
+		 */
 		if (isInWorld(vehicle) && AWVehicleStatics.renderVehicleNameplates && vehicle.getControllingPassenger() != Minecraft.getMinecraft().player) {
-			renderNamePlate(vehicle, x, y, z);
+			renderNamePlate(vehicle, x, y, z, renderYaw, partialTicks);
 		}
 
 	}
@@ -108,7 +138,7 @@ public class RenderVehicle extends Render<VehicleBase> {
 
 	private DecimalFormat formatter1d = new DecimalFormat("#.#");
 
-	private void renderNamePlate(VehicleBase vehicle, double x, double y, double z) {
+	private void renderNamePlate(VehicleBase vehicle, double x, double y, double z, float yaw, float tick) {
 		double var10 = vehicle.getDistanceSq(this.renderManager.renderViewEntity);
 		int par9 = 64;
 		String par2Str = vehicle.vehicleType.getLocalizedName() + " " + formatter1d.format(vehicle.getHealth()) + "/" + formatter1d.format(vehicle.baseHealth);

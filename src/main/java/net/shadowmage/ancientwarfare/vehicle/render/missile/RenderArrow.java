@@ -19,24 +19,28 @@
  * along with Ancient Warfare.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.shadowmage.ancientwarfare.vehicle.render.missile;
+package net.shadowmage.ancientwarfare.vehicle.render.vehicle;
 
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.shadowmage.ancientwarfare.vehicle.missiles.IAmmo;
-import net.shadowmage.ancientwarfare.vehicle.missiles.MissileBase;
-import net.shadowmage.ancientwarfare.vehicle.model.ModelArrow2;
+import net.shadowmage.ancientwarfare.vehicle.entity.VehicleBase;
+import net.shadowmage.ancientwarfare.vehicle.model.ModelAirplane;
 
-public class RenderArrow extends RenderMissileBase {
+public class RenderAircraft extends RenderVehicleBase {
 
-	public ModelArrow2 arrow2 = new ModelArrow2();
+	ModelAirplane model = new ModelAirplane();
 
-	public RenderArrow(RenderManager renderManager) {
+	public RenderAircraft(RenderManager renderManager) {
 		super(renderManager);
 	}
 
 	@Override
-	public void renderMissile(MissileBase missile, IAmmo ammo, double x, double y, double z, float yaw, float tick) {
-		arrow2.render(missile, 0, 0, 0, 0, 0, 0.0625f);
+	public void renderVehicle(VehicleBase veh, double x, double y, double z, float yaw, float tick) {
+		GlStateManager.rotate(-veh.rotationPitch, 1, 0, 0);
+		GlStateManager.rotate(veh.moveHelper.getRotationSpeed() * 10, 0, 0, 1);
+		float wheelAngle = veh.wheelRotation + (tick * (veh.wheelRotation - veh.wheelRotationPrev));
+		model.setWheelRotations(wheelAngle, wheelAngle, wheelAngle, wheelAngle);
+		model.render(veh, 0, 0, 0, 0, 0, 0.0625f);
 	}
 
 }
