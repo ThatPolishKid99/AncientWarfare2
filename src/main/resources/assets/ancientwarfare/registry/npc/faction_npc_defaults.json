@@ -14,7 +14,7 @@
             "burns_in_sun": false,
             "horse_entity": "net.minecraft.entity.passive.EntityHorse"
         },
-        "loot_table": "minecraft:empty",
+        "loot_table": "ancientwarfare:entities/faction_npc",
         "height": {
             "min": 1.7,
             "max": 1.8
@@ -28,8 +28,7 @@
                 "experience_drop": 20,
                 "equipment": {
                     "mainhand": "minecraft:iron_sword"
-                },
-                "loot_table": "ancientwarfare:entities/soldier"
+                }
             },
             "soldier.elite": {
                 "attributes": {
@@ -40,8 +39,7 @@
                 "experience_drop": 30,
                 "equipment": {
                     "mainhand": "minecraft:iron_sword"
-                },
-                "loot_table": "ancientwarfare:entities/soldier_elite"
+                }
             },
             "archer": {
                 "attributes": {
@@ -62,8 +60,7 @@
                 "experience_drop": 30,
                 "equipment": {
                     "mainhand": "minecraft:bow"
-                },
-                "loot_table": "ancientwarfare:entities/archer"
+                }
             },
             "cavalry": {
                 "attributes": {
@@ -73,8 +70,7 @@
                 "experience_drop": 40,
                 "equipment": {
                     "mainhand": "minecraft:iron_sword"
-                },
-                "loot_table": "ancientwarfare:entities/cavalry"
+                }
             },
             "mounted_archer": {
                 "attributes": {
@@ -83,8 +79,7 @@
                 "experience_drop": 30,
                 "equipment": {
                     "mainhand": "minecraft:bow"
-                },
-                "loot_table": "ancientwarfare:entities/mounted_archer"
+                }
             },
             "leader": {
                 "attributes": {
@@ -94,8 +89,7 @@
                 "experience_drop": 50,
                 "equipment": {
                     "mainhand": "minecraft:diamond_sword"
-                },
-                "loot_table": "ancientwarfare:entities/leader"
+                }
             },
             "leader.elite": {
                 "attributes": {
@@ -105,8 +99,7 @@
                 "experience_drop": 60,
                 "equipment": {
                     "mainhand": "minecraft:diamond_sword"
-                },
-                "loot_table": "ancientwarfare:entities/leader_elite"
+                }
             },
             "siege_engineer": {
                 "attributes": {
@@ -116,8 +109,7 @@
                 "experience_drop": 30,
                 "equipment": {
                     "mainhand": "minecraft:air"
-                },
-                "loot_table": "ancientwarfare:entities/siege_engineer"
+                }
             },
             "priest": {
                 "attributes": {
@@ -128,8 +120,7 @@
                 "experience_drop": 40,
                 "equipment": {
                     "mainhand": "minecraft:book"
-                },
-                "loot_table": "ancientwarfare:entities/priest"
+                }
             },
             "bard": {
                 "attributes": {
@@ -138,8 +129,7 @@
                 "equipment": {
                     "mainhand": "ancientwarfarenpc:bard_instrument"
                 },
-                "can_break_doors": false,
-                "loot_table": "minecraft:empty"
+                "can_break_doors": false
             },
             "trader": {
                 "attributes": {
@@ -149,8 +139,7 @@
                 "equipment": {
                     "mainhand": "minecraft:book"
                 },
-                "can_break_doors": false,
-                "loot_table": "minecraft:empty"
+                "can_break_doors": false
             },
             "civilian.female": {
                 "attributes": {
@@ -160,8 +149,7 @@
                 "equipment": {
                     "mainhand": "minecraft:air"
                 },
-                "can_break_doors": false,
-                "loot_table": "minecraft:empty"
+                "can_break_doors": false
             },
             "civilian.male": {
                 "attributes": {
@@ -171,8 +159,7 @@
                 "equipment": {
                     "mainhand": "minecraft:air"
                 },
-                "can_break_doors": false,
-                "loot_table": "minecraft:empty"
+                "can_break_doors": false
             }
         }
     },
@@ -502,7 +489,7 @@
                 "soldier": {
                     "equipment": {
                         "mainhand": "ancientwarfarenpc:stone_spear",
-                        "offhand": "ancientwarfarenpc:shield_buffloka"
+                        "offhand": "ancientwarfarenpc:shield_round_1"
                     }
                 },
                 "soldier.elite": {
@@ -517,7 +504,7 @@
                 "cavalry": {
                     "equipment": {
                         "mainhand": "ancientwarfarenpc:stone_spear",
-                        "offhand": "ancientwarfarenpc:shield_buffloka"
+                        "offhand": "ancientwarfarenpc:shield_round_1"
                     }
                 },
                 "leader": {
@@ -1258,59 +1245,43 @@
             "npc_subtypes": {
                 "soldier": {
                     "additional_attributes": {
-                        "burns_in_sun": true,
-                        "undead": true
-                },
-                    "loot_table": "ancientwarfare:entities/undead_soldier"
+                        "burns_in_sun": true
+                    }
                 },
                 "soldier.elite": {
                     "equipment": {
                         "mainhand": "ancientwarfarenpc:scythe"
                     },
                     "additional_attributes": {
-                        "burns_in_sun": true,
-                        "undead": true
-                },
-                    "loot_table": "ancientwarfare:entities/undead_soldier_elite"
+                        "burns_in_sun": true
+                    }
                 },
                 "archer": {
-                    "thinness": 0.9,
                     "additional_attributes": {
-                        "burns_in_sun": true,
-                        "undead": true
-                },
-                    "loot_table": "ancientwarfare:entities/undead_archer"
+                        "burns_in_sun": true
+                    }
                 },
                 "archer.elite": {
-                    "thinness": 0.9,
                     "additional_attributes": {
-                        "burns_in_sun": true,
-                        "undead": true
-                },
-                    "loot_table": "ancientwarfare:entities/undead_archer_elite"
+                        "burns_in_sun": true
+                    }
                 },
                 "cavalry": {
                     "additional_attributes": {
                         "burns_in_sun": true,
-                        "undead": true,
                         "horse_entity": "net.minecraft.entity.passive.EntitySkeletonHorse"
-                },
-                    "loot_table": "ancientwarfare:entities/undead_cavalry"
+                    }
                 },
                 "mounted_archer": {
                     "additional_attributes": {
                         "burns_in_sun": true,
-                        "undead": true,
                         "horse_entity": "net.minecraft.entity.passive.EntitySkeletonHorse"
-                },
-                    "loot_table": "ancientwarfare:entities/undead_mounted_archer"
+                    }
                 },
                 "leader": {
                     "additional_attributes": {
-                        "burns_in_sun": true,
-                        "undead": true
-                },
-                    "loot_table": "ancientwarfare:entities/undead_leader"
+                        "burns_in_sun": true
+                    }
                 },
                 "leader.elite": {
                     "attributes": {
@@ -1320,15 +1291,12 @@
                         "mainhand": "ancientwarfarenpc:death_scythe"
                     },
                     "additional_attributes": {
-                        "burns_in_sun": true,
-                        "undead": true
-                },
-                    "loot_table": "ancientwarfare:entities/undead_leader_elite"
+                        "burns_in_sun": true
+                    }
                 },
                 "siege_engineer": {
                     "additional_attributes": {
-                        "burns_in_sun": true,
-                        "undead": true
+                        "burns_in_sun": true
                     }
                 },
                 "priest": {
@@ -1336,15 +1304,12 @@
                         "mainhand": "minecraft:skull"
                     },
                     "additional_attributes": {
-                        "burns_in_sun": true,
-                        "undead": true
-                },
-                    "loot_table": "ancientwarfare:entities/undead_priest"
+                        "burns_in_sun": true
+                    }
                 },
                 "bard": {
                     "additional_attributes": {
-                        "burns_in_sun": true,
-                        "undead": true
+                        "burns_in_sun": true
                     }
                 },
                 "trader": {
@@ -1352,8 +1317,7 @@
                         "mainhand": "minecraft:bone"
                     },
                     "additional_attributes": {
-                        "burns_in_sun": true,
-                        "undead": true
+                        "burns_in_sun": true
                     }
                 },
                 "civilian.female": {
@@ -1377,7 +1341,7 @@
                 },
                 "soldier.elite": {
                     "height": {
-                        "min": 2,
+                        "min": 2.0,
                         "max": 2.2
                     },
                     "thinness": 1.1,
