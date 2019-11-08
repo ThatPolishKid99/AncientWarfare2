@@ -197,10 +197,7 @@ public class SmoothingMatrixBuilder {
 	}
 
 	private IBlockState getStateFromTemplate(BlockPos pos) {
-		int xSize = turns % 2 == 0 ? template.getSize().getX() : template.getSize().getZ();
-		int zSize = turns % 2 == 0 ? template.getSize().getZ() : template.getSize().getX();
-
-		Optional<TemplateRuleBlock> rule = template.getRuleAt(BlockTools.rotateInArea(pos.add(-bb.min.getX(), -bb.min.getY(), -bb.min.getZ()), xSize, zSize, -turns));
+		Optional<TemplateRuleBlock> rule = template.getRuleAt(BlockTools.rotateInArea(pos.add(-bb.min.getX(), -bb.min.getY(), -bb.min.getZ()), template.getSize().getX(), template.getSize().getZ(), -turns));
 		return rule.map(r -> r.getState(turns)).orElse(Blocks.DIRT.getDefaultState());
 	}
 
