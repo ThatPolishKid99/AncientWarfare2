@@ -13,49 +13,7 @@
                     "weight": 4,
                     "functions": [
                         {
-                            "function": "set_count",
-                            "count": {
-                                "min": 1,
-                                "max": 2
-                            }
-                        }
-                    ]
-                },
-                {
-                    "type": "item",
-                    "name": "ancientwarfarenpc:sickle",
-                    "weight": 3,
-                    "functions": [
-                        {
-                            "function": "set_count",
-                            "count": {
-                                "min": 1,
-                                "max": 2
-                            }
-                        }
-                    ]
-                },
-                {
-                    "type": "item",
-                    "name": "ancientwarfarenpc:scythe",
-                    "weight": 3,
-                    "functions": [
-                        {
-                            "function": "set_count",
-                            "count": {
-                                "min": 1,
-                                "max": 2
-                            }
-                        }
-                    ]
-                },
-                {
-                    "type": "item",
-                    "name": "ancientwarfarenpc:pitchfork",
-                    "weight": 3,
-                    "functions": [
-                        {
-                            "function": "set_count",
+                            "function": "minecraft:set_count",
                             "count": {
                                 "min": 1,
                                 "max": 2
@@ -69,7 +27,7 @@
                     "weight": 5,
                     "functions": [
                         {
-                            "function": "set_count",
+                            "function": "minecraft:set_count",
                             "count": {
                                 "min": 2,
                                 "max": 6
@@ -111,7 +69,7 @@
                     "weight": 3,
                     "functions": [
                         {
-                            "function": "set_count",
+                            "function": "minecraft:set_count",
                             "count": {
                                 "min": 1,
                                 "max": 4
@@ -125,7 +83,7 @@
                     "weight": 1,
                     "functions": [
                         {
-                            "function": "set_count",
+                            "function": "minecraft:set_count",
                             "count": {
                                 "min": 1,
                                 "max": 3
@@ -139,7 +97,7 @@
                     "weight": 4,
                     "functions": [
                         {
-                            "function": "set_count",
+                            "function": "minecraft:set_count",
                             "count": {
                                 "min": 1,
                                 "max": 2
@@ -153,7 +111,7 @@
                     "weight": 4,
                     "functions": [
                         {
-                            "function": "set_count",
+                            "function": "minecraft:set_count",
                             "count": {
                                 "min": 1,
                                 "max": 2
@@ -167,7 +125,7 @@
                     "weight": 5,
                     "functions": [
                         {
-                            "function": "set_count",
+                            "function": "minecraft:set_count",
                             "count": {
                                 "min": 2,
                                 "max": 6
@@ -178,7 +136,16 @@
                 {
                     "type": "item",
                     "name": "shears",
-                    "weight": 2
+                    "weight": 2,
+                    "functions": [
+                        {
+                            "function": "minecraft:set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 1
+                            }
+                        }
+                    ]
                 }
             ]
         }
