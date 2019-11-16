@@ -13,24 +13,10 @@
                     "weight": 4,
                     "functions": [
                         {
-                            "function": "set_count",
+                            "function": "minecraft:set_count",
                             "count": {
                                 "min": 2,
                                 "max": 4
-                            }
-                        }
-                    ]
-                },
-                {
-                    "type": "item",
-                    "name": "torch",
-                    "weight": 3,
-                    "functions": [
-                        {
-                            "function": "set_count",
-                            "count": {
-                                "min": 1,
-                                "max": 6
                             }
                         }
                     ]
@@ -41,7 +27,7 @@
                     "weight": 5,
                     "functions": [
                         {
-                            "function": "set_count",
+                            "function": "minecraft:set_count",
                             "count": {
                                 "min": 4,
                                 "max": 12
@@ -83,7 +69,7 @@
                     "weight": 5,
                     "functions": [
                         {
-                            "function": "set_count",
+                            "function": "minecraft:set_count",
                             "count": {
                                 "min": 4,
                                 "max": 8
@@ -97,7 +83,7 @@
                     "weight": 2,
                     "functions": [
                         {
-                            "function": "set_count",
+                            "function": "minecraft:set_count",
                             "count": {
                                 "min": 3,
                                 "max": 6
@@ -111,7 +97,7 @@
                     "weight": 3,
                     "functions": [
                         {
-                            "function": "set_count",
+                            "function": "minecraft:set_count",
                             "count": {
                                 "min": 4,
                                 "max": 8
@@ -125,7 +111,7 @@
                     "weight": 3,
                     "functions": [
                         {
-                            "function": "set_count",
+                            "function": "minecraft:set_count",
                             "count": {
                                 "min": 12,
                                 "max": 24
@@ -139,7 +125,7 @@
                     "weight": 5,
                     "functions": [
                         {
-                            "function": "set_count",
+                            "function": "minecraft:set_count",
                             "count": {
                                 "min": 4,
                                 "max": 8
@@ -153,7 +139,7 @@
                     "weight": 3,
                     "functions": [
                         {
-                            "function": "set_count",
+                            "function": "minecraft:set_count",
                             "count": {
                                 "min": 1,
                                 "max": 7
