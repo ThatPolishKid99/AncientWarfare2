@@ -13,7 +13,7 @@
                     "weight": 6,
                     "functions": [
                         {
-                            "function": "set_count",
+                            "function": "minecraft:set_count",
                             "count": {
                                 "min": 6,
                                 "max": 12
@@ -25,6 +25,20 @@
                     "type": "item",
                     "name": "wheat_seeds",
                     "weight": 5,
+                    "functions": [
+                        {
+                            "function": "minecraft:set_count",
+                            "count": {
+                                "min": 6,
+                                "max": 12
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "name": "harvestcraft:flouritem",
+                    "weight": 6,
                     "functions": [
                         {
                             "function": "set_count",
