@@ -10,6 +10,7 @@ import net.shadowmage.ancientwarfare.core.gui.elements.Label;
 import net.shadowmage.ancientwarfare.core.gui.elements.NumberInput;
 import net.shadowmage.ancientwarfare.core.gui.elements.Text;
 import net.shadowmage.ancientwarfare.npc.container.ContainerNpcCreativeControls;
+import net.shadowmage.ancientwarfare.npc.entity.faction.NpcFaction;
 
 public class GuiNpcCreativeControls extends GuiContainerBase<ContainerNpcCreativeControls> {
 	private Text ownerNameInput;
